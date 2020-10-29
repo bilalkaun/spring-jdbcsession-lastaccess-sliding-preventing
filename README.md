@@ -2,7 +2,7 @@
 
 This is a sample code for the blog at \<URL OF BLOG\>
 
-##Problem
+## Problem
 Given the use of JdbcSession we wish to exempt certain URLS from pushing a user's session timeout forward. 
 This can be useful in situation where a SPA application is used without JWT and instead relies on the JdbcSession for 
 state-less/load-balanced architecture.  A URL can be provided that loads and returns expected-expiry time about the session
@@ -29,7 +29,7 @@ to fulfil the specification of your charges. So proceed at your own perils.**
 Having said that, if you need this functionality, you're probably doing something questionable like me, anyway. So 
 enough of the boogyman, let's see how it works.
 
-####Spring Boot 2.2+ (as of this writing)
+#### Spring Boot 2.2+ (as of this writing)
 Class JdbcIndexedSessionRepository creates a 'session' instance from its nested private class 
 JdbcIndexedSessionRepository.JdbcSession. This is then nested inside SessionRepositoryFilter.HttpSessionWrapper class 
 (which extends the HttpSessionAdapter class) instance. The wrapper instance is then added as an attribute into the 
@@ -44,7 +44,7 @@ will reset the session 'dirty' flags so it won't persisted the updated "lastAcce
 Since these are all private classes, basic reflection needs to be used to reach into it.
 
 
-####Spring Boot 1.4.3+ 
+#### Spring Boot 1.4.3+ 
 Could be working on earlier versions, too, but I've not confirmed.
 
 The concept is exactly the same as for Spring Boot 2.2+, however the classes were refactored in 2.2 and so we must use 
@@ -54,7 +54,7 @@ Specifically the SessionRepositoryFilter.HttpSessionWrapper extends the Expiring
 getSession() we're after. As well as the value of the attribute key has change in SessionRepositoryFilter.CURRENT_SESSION_ATTR.
 
 
-####Annotation
+#### Annotation
 While this code can run as-is, the samples provided turn it into an annotation that can be put on a controller method.
 Using Aspect AOP, the code to clear the session dirty flag can be executed before the entering the method without becoming
 part of the controller login.
