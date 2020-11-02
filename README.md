@@ -1,6 +1,6 @@
 # URI Timeout Advancement Exemption
 
-This is a sample code for the blog at \<URL OF BLOG\>
+This is a sample code for the blog at https://bilalkaun.com/2020/11/02/preventing-session-timeout-extension-in-jdbcsession/
 
 ## Problem
 Given the use of JdbcSession we wish to exempt certain URLS from pushing a user's session timeout forward. 
